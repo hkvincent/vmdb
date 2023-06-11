@@ -6,14 +6,6 @@ import React, { useState } from 'react';
 import Head from "../head";
 
 
-
-export const metadata = {
-  title: 'VMDB : About',
-  description: 'find your fav movie',
-}
-
-
-
 export default function About() {
   return (
     <>
