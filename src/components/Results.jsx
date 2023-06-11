@@ -26,8 +26,8 @@ export default function Results({ results, apiKey }) {
   useEffect(() => {
     var options = {
       root: null,
-      rootMargin: "10px",
-      threshold: 1.0
+      rootMargin: "20px",
+      threshold: 0.5
     };
 
     const observer = new IntersectionObserver(handleObserver, options);
