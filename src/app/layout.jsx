@@ -4,6 +4,12 @@ import SearchBox from "@/components/SearchBox";
 
 import "./globals.css";
 import Providers from "./Providers";
+import Footer from "@/components/Footer";
+
+export const metadata = {
+  title: 'VMDB',
+  description: 'find your fav movie',
+}
 
 export default function RootLayout({ children }) {
   return (
@@ -23,6 +29,7 @@ export default function RootLayout({ children }) {
 
           {children}
 
+          <Footer />
         </Providers>
       </body>
     </html>

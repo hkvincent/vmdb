@@ -26,14 +26,17 @@ export default async function Home({ searchParams }) {
 
   const data1 = await responses[0].json(); // data from page 1
   const data2 = await responses[1].json(); // data from page 2
-
   const results = [...data1.results, ...data2.results]
-  console.log(results);
-  const apiKey = API_KEY;
   return (
     <div>
-      <Results results={results} apiKey={apiKey}/>
+      <Results results={results} apiKey={API_KEY} />
     </div>
   );
 }
 
+export async function generateMetadata({ searchParams }) {
+  return {
+      title: `VMDB : ${searchParams.genre  === "fetchTopRated" ? "Top Rated" : "Trending"}`,
+      description: `VMDB, your best movie database`,
+  };
+}

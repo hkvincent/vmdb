@@ -2,12 +2,14 @@
 import Card from "./Card";
 import { useState, useEffect, useRef } from "react";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
+import Loading from "@/components/Loading";
 export default function Results({ results, apiKey }) {
 
   const API_KEY = process.env.API_KEY;
 
   const [page, setPage] = useState(3);
   const [data, setData] = useState(results);
+  const [loading, setLoading] = useState(true);
 
   const loader = useRef(null);
 
@@ -24,7 +26,7 @@ export default function Results({ results, apiKey }) {
   useEffect(() => {
     var options = {
       root: null,
-      rootMargin: "20px",
+      rootMargin: "10px",
       threshold: 1.0
     };
 
@@ -32,10 +34,11 @@ export default function Results({ results, apiKey }) {
     if (loader.current) {
       observer.observe(loader.current)
     }
-  }, []);
+  }, [loading]);
 
   useEffect(() => {
-    setData([...results])
+    setData([...results]);
+    setLoading(false);
   }, [results])
 
   const handleObserver = (entities) => {
@@ -48,15 +51,22 @@ export default function Results({ results, apiKey }) {
   // console.log(data.length);
   // console.log(results[0])
   // console.log(results.length)
+
+  if (loading) {
+    return <Loading />
+  }
+
   return (
-    <div className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-6xl mx-auto py-4">
-      {data.map((result) => (
-        <Card key={result.id} result={result} />
-      ))}
-      <ScrollToTopButton />
-      <div ref={loader}>
-        <h2>Loading More...</h2>
+    <>
+      <div className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-6xl mx-auto py-4">
+        {data.map((result) => (
+          <Card key={result.id} result={result} />
+        ))}
+        <ScrollToTopButton />
       </div>
-    </div>
+      <div className="flex justify-center items-center" ref={loader}>
+        <Loading />
+      </div>
+    </>
   );
 }
