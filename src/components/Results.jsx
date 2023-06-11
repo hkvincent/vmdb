@@ -2,7 +2,7 @@
 import Card from "./Card";
 import { useState, useEffect, useRef } from "react";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
-import Loading from "@/components/Loading";
+import Loading from "@/components/PageLoading";
 export default function Results({ results, apiKey }) {
 
   const API_KEY = process.env.API_KEY;
