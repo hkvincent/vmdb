@@ -14,13 +14,13 @@ export default function Results({ results, apiKey }) {
   const loader = useRef(null);
 
   useEffect(() => {
-    const loadMoreData = async () => {
-      const response = await fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&page=${page}`);
-      const newData = await response.json();
-      setData(prevData => [...prevData, ...newData.results]);
-    };
 
-    apiKey && loadMoreData();
+    (async () => {
+      var resultJson = await fetch("/loadmore?page=" + page);
+      var result = await resultJson.json();
+      setData(prevData => [...prevData, ...result.newData.results]);
+    })();
+
   }, [page]);
 
   useEffect(() => {
