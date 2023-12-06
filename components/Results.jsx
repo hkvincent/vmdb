@@ -1,16 +1,15 @@
 "use client";
 import Card from "./Card";
 import { useState, useEffect, useRef } from "react";
-import ScrollToTopButton from "@/components/ScrollToTopButton";
-import Loading from "@/components/PageLoading";
-export default function Results({ results, apiKey }) {
+import ScrollToTopButton from "components/ScrollToTopButton";
+import Loading from "components/PageLoading";
+export default function Results({ results }) {
 
   const API_KEY = process.env.API_KEY;
 
   const [page, setPage] = useState(3);
   const [data, setData] = useState(results);
   const [loading, setLoading] = useState(true);
-
   const loader = useRef(null);
 
   useEffect(() => {

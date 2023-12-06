@@ -1,4 +1,4 @@
-import Results from "@/components/Results";
+import Results from "components/Results";
 
 export default async function SearchPage({ params }) {
   const res = await fetch(

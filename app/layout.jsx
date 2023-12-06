@@ -1,10 +1,10 @@
-import Header from "@/components/Header";
-import Navbar from "@/components/Navbar";
-import SearchBox from "@/components/SearchBox";
+import Header from "components/Header";
+import Navbar from "components/Navbar";
+import SearchBox from "components/SearchBox";
 
 import "./globals.css";
 import Providers from "./Providers";
-import Footer from "@/components/Footer";
+import Footer from "components/Footer";
 
 export const metadata = {
   title: 'VMDB',
