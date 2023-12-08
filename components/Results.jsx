@@ -46,10 +46,6 @@ export default function Results({ results }) {
       setPage((prev) => prev + 1)
     }
   }
-  // console.log(data[0]);
-  // console.log(data.length);
-  // console.log(results[0])
-  // console.log(results.length)
 
   if (loading) {
     return <Loading />
