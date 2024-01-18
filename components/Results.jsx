@@ -1,55 +1,64 @@
 "use client";
 import Card from "./Card";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import ScrollToTopButton from "components/ScrollToTopButton";
 import Loading from "components/PageLoading";
+
 export default function Results({ results }) {
-
-  const API_KEY = process.env.API_KEY;
-
   const [page, setPage] = useState(3);
   const [data, setData] = useState(results);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const loader = useRef(null);
 
+  // Function to load more data
+  const loadMoreData = async () => {
+    setLoading(true);
+    const response = await fetch(`/loadmore?page=${page}`);
+    const newResults = await response.json();
+    setData((prevData) => [...prevData, ...newResults.newData.results]);
+    setLoading(false);
+  };
+
+  // Observer callback
+  const handleObserver = useCallback((entries) => {
+    const target = entries[0];
+    if (target.isIntersecting) {
+      setPage((prev) => prev + 1);
+    }
+  }, []);
+
+  // Intersection Observer to load more data
   useEffect(() => {
+    if (!loading) {
+      const observer = new IntersectionObserver(handleObserver, {
+        root: null,
+        rootMargin: "20px",
+        threshold: 0.5
+      });
+      if (loader.current) {
+        observer.observe(loader.current);
+      }
 
-    (async () => {
-      var resultJson = await fetch("/loadmore?page=" + page);
-      var result = await resultJson.json();
-      setData(prevData => [...prevData, ...result.newData.results]);
-    })();
+      // Cleanup observer on component unmount
+      return () => {
+        if (loader.current) {
+          observer.unobserve(loader.current);
+        }
+      };
+    }
+  }, [loading, handleObserver]);
 
+  // Load more data when page changes
+  useEffect(() => {
+    if (page > 3) {
+      loadMoreData();
+    }
   }, [page]);
 
-  useEffect(() => {
-    var options = {
-      root: null,
-      rootMargin: "20px",
-      threshold: 0.5
-    };
-
-    const observer = new IntersectionObserver(handleObserver, options);
-    if (loader.current) {
-      observer.observe(loader.current)
-    }
-  }, [loading]);
-
+  // Set initial data
   useEffect(() => {
     setData([...results]);
-    setLoading(false);
-  }, [results])
-
-  const handleObserver = (entities) => {
-    const target = entities[0];
-    if (target.isIntersecting) {
-      setPage((prev) => prev + 1)
-    }
-  }
-
-  if (loading) {
-    return <Loading />
-  }
+  }, [results]);
 
   return (
     <>
@@ -60,7 +69,7 @@ export default function Results({ results }) {
         <ScrollToTopButton />
       </div>
       <div className="flex justify-center items-center" ref={loader}>
-        <Loading />
+        {loading && <Loading />}
       </div>
     </>
   );

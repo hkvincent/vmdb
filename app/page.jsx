@@ -5,18 +5,19 @@
 export const dynamic = "force-dynamic"; // this is the fix
 
 import Results from "components/Results";
+import { Suspense } from "react";
 
 const API_KEY = process.env.API_KEY;
 
 export default async function Home({ searchParams }) {
   const genre = searchParams.genre || "fetchTrending";
-
   const responses = await Promise.all([
     fetch(`https://api.themoviedb.org/3/${genre === "fetchTopRated" ? "movie/top_rated" : "trending/all/week"
       }?api_key=${API_KEY}&page=1`, { next: { revalidate: 10000 } }),
     fetch(`https://api.themoviedb.org/3/${genre === "fetchTopRated" ? "movie/top_rated" : "trending/all/week"
       }?api_key=${API_KEY}&page=2`, { next: { revalidate: 10000 } })
   ]);
+
 
   responses.forEach((res, i) => {
     if (!res.ok) {
@@ -36,7 +37,7 @@ export default async function Home({ searchParams }) {
 
 export async function generateMetadata({ searchParams }) {
   return {
-      title: `VMDB : ${searchParams.genre  === "fetchTopRated" ? "Top Rated" : "Trending"}`,
-      description: `VMDB, your best movie database`,
+    title: `VMDB : ${searchParams.genre === "fetchTopRated" ? "Top Rated" : "Trending"}`,
+    description: `VMDB, your best movie database`,
   };
 }
