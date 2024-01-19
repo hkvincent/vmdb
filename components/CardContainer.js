@@ -23,7 +23,7 @@ const CardContainer = async ({ genre }) => {
 
   return (
     <div>
-      <Results results={results} />
+      <Results results={results} params={genre} />
     </div>
   );
 };
