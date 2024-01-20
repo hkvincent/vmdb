@@ -8,7 +8,7 @@ export default function SearchBox() {
   function handleSubmit(e) {
     e.preventDefault();
     if (!search) return;
-    router.push(`/search/${search}`);
+    router.push(`/movie/search/${search}`);
   }
   return (
     <form
