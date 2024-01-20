@@ -11,7 +11,7 @@ export const metadata = {
   description: 'find your fav movie',
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, movie }) {
   return (
     <html lang="en">
       <body>
@@ -26,9 +26,8 @@ export default function RootLayout({ children }) {
           {/* SearchBox */}
 
           <SearchBox />
-
+          {movie}
           {children}
-
           <Footer />
         </Providers>
       </body>

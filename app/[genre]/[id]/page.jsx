@@ -8,6 +8,8 @@ async function getMovie(movieId) {
 }
 
 export default async function MoviePage({ params }) {
+  // wait for 3 seconds
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   const movieId = params.id;
   const movie = await getMovie(movieId);
   return (

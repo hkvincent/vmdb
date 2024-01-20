@@ -5,7 +5,7 @@ import { Suspense } from "react";
 export default function GenrePage(params) {
   return (
     <div>
-      <Suspense fallback={<Loading/>}>
+      <Suspense fallback={<Loading />}>
         <CardContainer genre={params.params.genre} />
       </Suspense>
     </div>
