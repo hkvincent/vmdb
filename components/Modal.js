@@ -21,13 +21,13 @@ export function Modal({ children }) {
 
   return createPortal(
     <div className="fixed inset-0 z-100 flex items-center justify-center" ref={overlay} onClick={onDismiss}>
-      <dialog ref={dialogRef} className="bg-white/90  dark:bg-black/90 rounded-lg" onClose={onDismiss}>
+      <dialog ref={dialogRef} className="bg-white/90  dark:bg-black/90 rounded-lg" >
         {children}
-        <button onClick={onDismiss} className="close-button relative dark:text-white text-black">
-          {/* <span className="absolute inset-0 flex items-center justify-center">
+        {/* <button onClick={onDismiss} className="close-button relative dark:text-white text-black">
+          <span className="absolute inset-0 flex items-center justify-center">
             X
-          </span> */}
-        </button>
+          </span>
+        </button> */}
       </dialog>
     </div>,
     document.getElementById('modal-root')
