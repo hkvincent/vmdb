@@ -1,6 +1,6 @@
 {
-  "name": "imdb",
-  "version": "0.1.0",
+  "name": "vmdb",
+  "version": "0.8.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,18 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/react": "^18.2.9",
-    "eslint": "8.32.0",
-    "eslint-config-next": "13.1.5",
-    "next": "^14.0.0",
-    "next-themes": "^0.2.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-icons": "^4.7.1",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@types/react": "^18.2.9",
+    "eslint": "8.32.0",
+    "eslint-config-next": "13.1.5",
+    "next": "^14.1.1-canary.4",
+    "next-themes": "^0.2.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.7.1",
     "react-obfuscate": "^3.6.9"
   },
   "devDependencies": {
